@@ -1,0 +1,20 @@
+.feedback summary {
+    margin-bottom: 1em;
+    display: block;
+    cursor: initial;
+}
+.js-feedback-form {
+    max-width: 35em;
+}
+.js-feedback-star-container {
+    font-size: 2em;
+    vertical-align: -0.25rem;
+    margin-left: 0.5em;
+}
+.js-feedback-star-container span {
+    color: #999;
+    cursor: pointer;
+}
+.js-feedback-star-container .js-feedback-star-active {
+    color: #FBC02D;
+}
