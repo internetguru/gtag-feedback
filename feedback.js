@@ -100,6 +100,12 @@ class Feedback {
 
   }
 
+  textToBase64(text) {
+    const bytes = new TextEncoder().encode(text)
+    const binString = String.fromCodePoint(...bytes)
+    return btoa(binString)
+  }
+
   sendFeedback() {
     this.#text = this.textArea.value
     this.#email = this.emailInput.value
@@ -107,7 +113,7 @@ class Feedback {
     gtag('event', 'feedback', {
       'stars': this.#stars,
       'text': this.#text,
-      'email': this.#email
+      'email': this.textToBase64(this.#email)
     })
     this.#settings.parentElement.innerHTML = `<div class="alert alert-success" role="alert">${this.#settings.successText}</div>`
   }
