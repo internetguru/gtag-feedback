@@ -17,7 +17,8 @@ class Feedback {
     emailClass: 'js-feedback-email',
     submitText: 'Send feedback',
     successText: 'Thank you for your feedback!',
-    missingGtag: 'Missing Google Tag manager'
+    missingGtag: 'Missing Google Tag manager',
+    debug: false
   }
 
   constructor(settings) {
@@ -26,9 +27,16 @@ class Feedback {
       this.#settings.parentElement.innerHTML = `<div class="alert alert-danger" role="alert">${this.#settings.missingGtag}</div>`
       return
     }
+    this.initLibs()
     this.createForm()
     this.createStarRating()
     this.initOpenEvent()
+  }
+
+  initLibs() {
+    const script = document.createElement('script')
+    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/crypto-js/3.1.2/rollups/aes.js'
+    document.head.appendChild(script)
   }
 
   createStarRating() {
@@ -109,12 +117,19 @@ class Feedback {
   sendFeedback() {
     this.#text = this.textArea.value
     this.#email = this.emailInput.value
-    // Send feedback to Google Analytics
-    gtag('event', 'feedback', {
-      'stars': this.#stars,
+    const data = {
+      'raiting': this.#stars,
+      'stars': '*'.repeat(this.#stars),
       'text': this.#text,
-      'email': this.textToBase64(this.#email)
-    })
+      // CryptoJS.AES.decrypt(val, 'email-secret-phrase').toString(CryptoJS.enc.Utf8)
+      'email': CryptoJS.AES.encrypt(this.#email, 'email-secret-phrase').toString()
+    }
+    if (this.#settings.debug) {
+      console.log(data)
+    } else {
+      // Send feedback to Google Analytics
+      gtag('event', 'feedback', data)
+    }
     this.#settings.parentElement.innerHTML = `<div class="alert alert-success" role="alert">${this.#settings.successText}</div>`
   }
 }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Google Tag Feedback</title>
+    <script async="" src="https://www.googletagmanager.com/gtag/js?id=G-ND03H7T2RT"></script>
+    <script type="text/javascript" src="feedback.js"></script>
+    <link rel="stylesheet" type="text/css" href="feedback.css">
+</head>
+<body>
+    <h1>Google Tag Feedback</h1>
+    <div class="gtag-feedback"></div>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-ND03H7T2RT');
+    </script>
+    <script type="text/javascript">
+        let feedback = new Feedback({
+            parentElement: document.querySelector('.gtag-feedback'),
+            debug: true
+        })
+    </script>
+</body>
+</html>
