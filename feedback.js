@@ -119,7 +119,7 @@ class Feedback {
     this.#text = this.textArea.value
     this.#email = this.emailInput.value
     const data = {
-      'raiting': this.#stars,
+      'rating': this.#stars,
       'stars': '*'.repeat(this.#stars),
       'text': this.#text,
       // CryptoJS.AES.decrypt(val, 'email-secret-phrase').toString(CryptoJS.enc.Utf8)
