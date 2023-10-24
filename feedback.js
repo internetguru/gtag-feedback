@@ -90,6 +90,7 @@ class Feedback {
     submitBtn.addEventListener('click', (event) => {
       event.preventDefault()
       this.sendFeedback()
+      this.form.dispatchEvent(new Event('submit'))
     })
     this.#settings.parentElement.appendChild(this.form)
   }
