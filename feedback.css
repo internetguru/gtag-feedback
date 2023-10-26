@@ -3,6 +3,12 @@
     display: block;
     cursor: initial;
 }
+.feedback details > summary {
+  list-style: none;
+}
+.feedback details > summary::-webkit-details-marker {
+  display: none;
+}
 .js-feedback-form {
     max-width: 35em;
 }
