@@ -18,6 +18,7 @@ class Feedback {
     submitText: 'Send feedback',
     successText: 'Thank you for your feedback!',
     missingGtag: 'Missing Google Tag manager',
+    extraParams: {},
     debug: false
   }
 
@@ -123,7 +124,8 @@ class Feedback {
       'stars': '*'.repeat(this.#stars),
       'text': this.#text,
       // CryptoJS.AES.decrypt(val, 'email-secret-phrase').toString(CryptoJS.enc.Utf8)
-      'email': CryptoJS.AES.encrypt(this.#email, 'email-secret-phrase').toString()
+      'email': CryptoJS.AES.encrypt(this.#email, 'email-secret-phrase').toString(),
+      ...this.#settings.extraParams
     }
     if (this.#settings.debug) {
       console.log(data)
