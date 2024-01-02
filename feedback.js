@@ -18,6 +18,7 @@ class Feedback {
     submitText: 'Send feedback',
     successText: 'Thank you for your feedback!',
     missingGtag: 'Missing Google Tag manager',
+    emptyMessageConfirm: 'Are you sure you want to send empty message? Empty message leads to no action.',
     extraParams: {},
     debug: false
   }
@@ -90,6 +91,9 @@ class Feedback {
     submitBtn.innerText = 'Send'
     submitBtn.addEventListener('click', (event) => {
       event.preventDefault()
+      if (this.#text.trim().length == 0 && !confirm(this.#settings.emptyMessageConfirm)) {
+        return
+      }
       this.sendFeedback()
       this.form.dispatchEvent(new Event('submit'))
     })
