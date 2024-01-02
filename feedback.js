@@ -124,7 +124,8 @@ class Feedback {
       'stars': '*'.repeat(this.#stars),
       'text': this.#text,
       // CryptoJS.AES.decrypt(val, 'email-secret-phrase').toString(CryptoJS.enc.Utf8)
-      'email': CryptoJS.AES.encrypt(this.#email, 'email-secret-phrase').toString(),
+      // Send empty string if email is not provided
+      'email': this.#email.trim().length == 0 ? '' : CryptoJS.AES.encrypt(this.#email, 'email-secret-phrase').toString(),
       ...this.#settings.extraParams
     }
     if (this.#settings.debug) {
